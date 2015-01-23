@@ -1,5 +1,23 @@
 """This file should have our melon-type classes in it."""
-class Watermelon(object):
+
+BASE_MELON_PRICE = 5
+
+class Melon(object):
+    # def __init__(self):
+    #     self.species = None
+    #     self.shape = "natural"
+    #     price = get_price()
+
+    def get_price(self, qty):
+        price = BASE_MELON_PRICE * qty
+        if self.is_imported == True:
+            price = price * 1.5
+        if self.shape != "natural":
+            price = price * 2
+        return price
+
+
+class Watermelon(Melon):
     
     def __init__(self):
         self.species = "Watermelon"
@@ -7,23 +25,12 @@ class Watermelon(object):
         self.is_imported = False
         self.shape = "natural"
         self.seasons = ["Fall", "Summer"]
-        self.price = 5
 
     def get_price(self, qty):
-        price = self.price
-        if self.is_imported == True:
-            total_price = price * 1.5 * qty
-        else:
-            total_price = price * qty
-        if self.shape != "natural":
-            final_price = total_price * 2
-        else:
-            final_price = total_price
+        price = super(Watermelon, self).get_price(qty)
         if qty >= 3:
-            discount_price = final_price * 0.75
-        else:
-            discount_price = final_price
-        return discount_price
+            price = price * 0.75
+        return price
 
 class Cantaloupe(object):
     def __init__(self):
